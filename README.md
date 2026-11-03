@@ -1,3 +1,43 @@
+# FreeCAD MCP Mod
+
+公式の [FreeCAD MCP](https://github.com/neka-nat/freecad-mcp) に、サーバーの状態を常に表示する機能を追加した改造版です。公式版の機能や使い方は、このセクションの下にある公式のREADMEをご覧ください。
+
+## 修正内容
+
+FreeCAD 画面右下のステータスバーに、MCPサーバーの状態を表示します。FreeCAD を起動した直後から表示され、Part Design など別のワークベンチに切り替えても消えません。Auto-Start Server がオフでも表示されます。
+
+| 表示 | 文字色 | 意味 |
+| --- | --- | --- |
+| 🟢 MCP Server: Running | 緑 | サーバー稼働中 |
+| 🔴 MCP Server: Stopped | 赤 | サーバー停止中 |
+| 🟠 MCP Server: Stopping... | オレンジ | 停止処理中（短時間のため表示されないこともあります） |
+
+この表示は FreeCAD 側のサーバーが動いているかどうかを示すものです。AIアシスタントとの接続状態を示すものではありません。
+
+## 導入方法
+
+1. FreeCAD を完全に終了します。
+2. このリポジトリを `git clone` するか、ZIPでダウンロードして展開します。
+3. FreeCAD のアドオンフォルダ（`Mod`）を開きます。Windows の FreeCAD 1.1 では `%APPDATA%\FreeCAD\v1-1\Mod\` です。その他の環境は、下の「[Install addon](#install-addon)」をご覧ください。
+4. 公式版がすでに入っている場合は、`FreeCADMCP` フォルダを `Mod` の外へ移動してバックアップします。二重に読み込まれるのを防ぐため、別名にして `Mod` の中に残さないでください。
+5. リポジトリ内の `addon/FreeCADMCP` フォルダを `Mod` フォルダへコピーします。
+6. 次の配置になっていることを確認し、FreeCAD を起動します。
+
+   ```text
+   Mod/FreeCADMCP/InitGui.py
+   Mod/FreeCADMCP/rpc_server/mcp_status.py
+   ```
+
+7. 右下にサーバーの状態が表示されれば成功です。
+
+Claude Desktop の設定は公式版と同じです。下の「[Setting up Claude Desktop](#setting-up-claude-desktop)」をご覧ください。
+
+自動起動などの設定は `Mod` の外に保存されるため、アドオンを置き換えても引き継がれます。Addon Manager でアドオンを更新すると、この改造版が公式版で上書きされることがあります。その場合は、もう一度この手順でコピーしてください。
+
+公式版に戻す場合は、FreeCAD を終了して `Mod` フォルダ内の `FreeCADMCP` を削除し、バックアップしたフォルダを `Mod` フォルダに戻します。
+
+---
+
 [![MseeP.ai Security Assessment Badge](https://mseep.net/pr/neka-nat-freecad-mcp-badge.png)](https://mseep.ai/app/neka-nat-freecad-mcp)
 
 # FreeCAD MCP

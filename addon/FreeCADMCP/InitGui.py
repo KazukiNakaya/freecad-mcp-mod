@@ -58,4 +58,19 @@ def _auto_start_mcp():
 
 from PySide import QtCore
 
+
+def _install_mcp_status():
+    # Install independently of workbench activation and auto-start settings.
+    try:
+        from rpc_server.mcp_status import install_status_indicator
+
+        install_status_indicator()
+    except Exception as e:
+        FreeCAD.Console.PrintWarning(f"[MCP] Status indicator failed: {e}\n")
+
+
+# FreeCAD exec()s this file inside a function, so top-level names here are not
+# visible from function bodies: schedule each one directly, don't call one from
+# another.
+QtCore.QTimer.singleShot(0, _install_mcp_status)
 QtCore.QTimer.singleShot(0, _auto_start_mcp)
